@@ -171,59 +171,51 @@ public class agregarTexto {
 		return r;
 	}
 
-	public static void sobreescribirLocal() throws IOException, SQLException {
-		try {
-			Statement stmt = conexion.createStatement();
-			rset = stmt.executeQuery("SELECT * FROM fichero");
-
-			while (rset.next()) {
-
-				BufferedWriter writer = new BufferedWriter(new FileWriter("src/fichero.txt"));
-				writer.append("\n\n" + +rset.getInt(1) + "\n");
-				writer.append(rset.getString(2) + "\n");
-				writer.append(rset.getString(3) + "\n");
-				writer.append(rset.getString(4));
-				System.out.println(rset.getInt(1));
-				System.out.println(rset.getString(2));
-				System.out.println(rset.getString(3));
-				System.out.println(rset.getString(4) + "\n");
-
-				writer.close();
-
-			}
-			rset.close();
-			stmt.close();
-		} catch (SQLException s) {
-			s.printStackTrace();
-		}
-	}
 	/*
-	 * ArrayList<String[]> result = new ArrayList<String[]>(); Statement stmt =
-	 * conexion.createStatement(); rset =
-	 * stmt.executeQuery("SELECT * FROM fichero"); int columnCount =
-	 * rset.getMetaData().getColumnCount(); while (rset.next()) { String[] row = new
-	 * String[columnCount]; for (int i = 0; i < columnCount; i++) { row[i] =
-	 * rset.getString(i + 1); } result.add(row); }
+	 * public static void sobreescribirLocal() throws IOException, SQLException {
+	 * try { Statement stmt = conexion.createStatement(); rset =
+	 * stmt.executeQuery("SELECT * FROM fichero");
 	 * 
-	 * for (String[] ar : result) { for (String dato : ar) { data += dato + "\n"; }
-	 * data += "\n\n";
-	 * 
-	 * }
+	 * while (rset.next()) {
 	 * 
 	 * BufferedWriter writer = new BufferedWriter(new
-	 * FileWriter("src/fichero.txt")); writer.append(data);
+	 * FileWriter("src/fichero.txt")); writer.append("\n\n" + +rset.getInt(1) +
+	 * "\n"); writer.append(rset.getString(2) + "\n");
+	 * writer.append(rset.getString(3) + "\n"); writer.append(rset.getString(4));
+	 * System.out.println(rset.getInt(1)); System.out.println(rset.getString(2));
+	 * System.out.println(rset.getString(3)); System.out.println(rset.getString(4) +
+	 * "\n");
 	 * 
-	 * writer.close(); }
-	 *
-	 * try { ObjectOutputStream ficheroSalida = new ObjectOutputStream(new
-	 * FileOutputStream(fichero));
+	 * writer.close();
 	 * 
-	 * ficheroSalida.write(data);
-	 * 
-	 * ficheroSalida.flush(); ficheroSalida.close();
-	 * System.out.println("El local ha sido sobreescrito"); } catch
-	 * (FileNotFoundException fnfe) {
-	 * System.out.println("Error: El fichero no existe. "); } catch (IOException
-	 * ioe) { System.out.println("Error: Fallo en la escritura en el fichero. "); }
+	 * } rset.close(); stmt.close(); } catch (SQLException s) { s.printStackTrace();
+	 * } }
 	 */
+	public static void sobreescribirLocal() throws SQLException, IOException {
+		ArrayList<String[]> result = new ArrayList<String[]>();
+		Statement stmt = conexion.createStatement();
+		rset = stmt.executeQuery("SELECT * FROM fichero");
+		int columnCount = rset.getMetaData().getColumnCount();
+		while (rset.next()) {
+			String[] row = new String[columnCount];
+			for (int i = 0; i < columnCount; i++) {
+				row[i] = rset.getString(i + 1);
+			}
+			result.add(row);
+		}
+
+		for (String[] ar : result) {
+			for (String dato : ar) {
+				data += dato + "\n";
+			}
+			data += "\n\n";
+
+		}
+
+		BufferedWriter writer = new BufferedWriter(new FileWriter("src/fichero.txt"));
+		writer.append(data);
+
+		writer.close();
+	}
+
 }
