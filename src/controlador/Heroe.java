@@ -1,4 +1,4 @@
-
+package controlador;
 
 public class Heroe  {
     private  int id;
