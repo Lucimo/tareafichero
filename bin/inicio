@@ -1,0 +1,4 @@
+url=jdbc:mysql://localhost/tareaficheros?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+ruta=src/fichero.txt
+login=root
+pwd=

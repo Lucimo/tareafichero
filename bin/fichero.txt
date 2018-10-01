@@ -1,4 +1,3 @@
-
 1
 pablo
 mago
@@ -6,4 +5,8 @@ mago
 2
 Lucas
 guerrero
+90
+3
+sebas
+brujoNegro
 90
